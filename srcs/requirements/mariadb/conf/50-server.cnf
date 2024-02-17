@@ -1,0 +1,20 @@
+[mysqld]
+
+#folder for saving database
+datadir = /var/lib/mysql
+
+#location socket for communication
+#socket  = /run/mysqld/mysqld.sock
+
+#All IP addresses in  network can connect
+bind_address=*
+
+#communication port
+port = 3306
+
+#add user
+user = mysql
+
+#save log_errors
+#log_error = /var/log/mysql/error.log
+					
