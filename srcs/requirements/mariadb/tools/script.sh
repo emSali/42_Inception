@@ -2,18 +2,18 @@
 
 service mysql start;
 
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;"
+mysql -e "CREATE DATABASE IF NOT EXISTS Test_DB;"
 
-mysql -e "CREATE USER IF NOT EXISTS \`${MYSQL_USER}\`@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+mysql -e "CREATE USER IF NOT EXISTS `esali`@'localhost' IDENTIFIED BY '12345';"
 
-mysql -e "GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO \`${MYSQL_USER}\`@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+mysql -e "GRANT ALL PRIVILEGES ON Test_DB.* TO `esali`@'%' IDENTIFIED BY '12345';"
 
 #modify root user
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '12345';"
 
 #refresh privileges
 mysql -e "FLUSH PRIVILEGES;"
 
 #restart MYSQL
-mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
+mysqladmin -u root -p '12345'  shutdown
 mysqld_safe

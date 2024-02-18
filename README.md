@@ -24,3 +24,6 @@ Remove Docker Container & Image:
 1. docker stop <name-container>
 2. docker rm <name-container>
 3. docker rmi -f <new_image_name>
+
+CLEAR ALL IMAGES, CONTAINERS, CACHES
+docker system prune
