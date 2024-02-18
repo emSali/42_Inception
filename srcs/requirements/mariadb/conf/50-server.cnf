@@ -2,7 +2,7 @@
 
 [mysqld]
 
-user		= mysql
+user		= root
 
 #folder for saving database
 datadir		= /var/lib/mysql
