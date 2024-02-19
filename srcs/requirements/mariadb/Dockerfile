@@ -10,11 +10,13 @@ RUN	apt-get install mariadb-server -y
 
 COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
-COPY	./tools/script.sh /
+COPY	./tools/initial_db.sql /var/www/
 
-RUN	chmod +x /script.sh
+#RUN	chmod +x /script.sh
 
-CMD	[ "/script.sh" ]
+#CMD	[ "/script.sh" ]
 
-#Command to launch mariadb and enable the database to listen globally 
-# CMD 	["mysql", "--bind-address=0.0.0.0"]
+RUN	service mariadb start && mysql < /var/www/initial_db.sql && rm -f /var/www/initial_db.sql;
+
+#Command to launch mariadb 
+CMD 	["mysqld"]
