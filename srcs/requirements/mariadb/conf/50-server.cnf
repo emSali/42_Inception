@@ -19,10 +19,12 @@ bind_address	= *
 port		= 3306
 
 #save log_errors
-#log_error = /var/log/mysql/error.log
+log_error = /var/log/mysql/error.log
 				
 
 [embedded]
 
 [mariadb]
+
+[mariadb-10.3]
 	
