@@ -8,7 +8,7 @@ re:
 	@docker compose -f srcs/docker-compose.yml up -d --build
 
 status:
-	@docker ps
+	@docker ps -la
 	@docker images
 
 clean:
@@ -16,7 +16,9 @@ clean:
 	docker rm $$(docker ps -qa);\
 	docker rmi -f $$(docker images -qa);\
 	docker volume rm $$(docker volume ls -q);\
-	docker network rm $$(docker network ls -q);\
+	for network in $$(docker network ls --format "{{.Name}}" | grep -vE '^(bridge|host|none)'); do \
+    	docker network rm $$network; \
+    done
 
 deepclean:
 	yes | docker system prune

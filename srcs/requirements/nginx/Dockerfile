@@ -1,10 +1,10 @@
 # Start of imgae with a node base image
-FROM	debian:bullseye
+FROM		debian:bullseye
 
 #install needed packages with answering yes to all prompts (-y)
-RUN	apt-get update && apt-get install -y \
-	nginx \
-	openssl
+RUN			apt-get update && apt-get install -y \
+			nginx \
+			openssl
 
 #RUN	mkdir -p /etc/nginx/ssl
 
@@ -22,16 +22,16 @@ RUN	apt-get update && apt-get install -y \
 
 #RUN	mkdir -p /var/run/nginx
 
-COPY	conf/nginx.conf /etc/nginx/sites-enabled/default
 
-COPY	./tools/script.sh /var/www/nginx_script.sh
+COPY		./conf/default /etc/nginx/sites-enabled/default
+COPY		./tools/nginx_script.sh /var/www
 
-RUN	chmod +x /var/www/nginx_script.sh
+RUN			chmod +x /var/www/nginx_script.sh
 
 # only allowed port
-EXPOSE	443
+EXPOSE		443
 
 ENTRYPOINT	[ "var/www/nginx_script.sh" ]
 
 #container startetd in foreground, does not stop
-CMD	["nginx", "-g", "daemon off;"]
+CMD			["nginx", "-g", "daemon off;"]

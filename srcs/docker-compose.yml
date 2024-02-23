@@ -32,8 +32,6 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    expose:
-      - "3306"
 
   wordpress:
     container_name: wordpress
@@ -47,8 +45,6 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    expose:
-      - "9000"
 
   nginx:
     container_name: nginx
@@ -61,6 +57,4 @@ services:
       - wp:/var/www/html
     networks:
       - app-network
-    restart: on-failure
-    expose:
-      - "443:443"
+    restart: unless-stopped

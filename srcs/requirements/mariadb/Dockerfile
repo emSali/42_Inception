@@ -1,7 +1,7 @@
 FROM	debian:bullseye
 
-RUN	apt-get update -y 
-RUN	apt-get install mariadb-server -y
+RUN	    apt-get update && \
+        apt-get install -y mariadb-server
 
 # RUN	mkdir -p /run/mysqld \
 #	&& chown -R mysql:mysql /run/mysqld \
@@ -16,7 +16,9 @@ COPY	./tools/initial_db.sql /var/www/
 
 #CMD	[ "/script.sh" ]
 
-RUN	service mariadb start && mysql < /var/www/initial_db.sql && rm -f /var/www/initial_db.sql;
+RUN	    service mariadb start && mysql < /var/www/initial_db.sql && rm -f /var/www/initial_db.sql;
+
+EXPOSE  3306
 
 #Command to launch mariadb 
 CMD 	["mysqld"]

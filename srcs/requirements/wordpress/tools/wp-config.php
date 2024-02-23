@@ -29,7 +29,7 @@ define( 'DB_USER', 'esali' );
 define( 'DB_PASSWORD', '12345' );
 
 /** Database hostname */
-define( 'DB_HOST', 'mydb' );
+define( 'DB_HOST', 'mariadb' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
