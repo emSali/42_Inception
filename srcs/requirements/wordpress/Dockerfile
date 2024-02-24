@@ -5,7 +5,10 @@ RUN			apt-get update && apt-get install -y \
 			php7.4 \
 			php-fpm \
 			php-mysqli \
-			sendmail
+			mariadb-client
+
+RUN			rm -rf /var/lib/apt/lists/*
+
 
 COPY		./conf/www.conf /etc/php/7.4/fpm/pool.d
 COPY		./tools/ /var/www/
