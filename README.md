@@ -29,3 +29,5 @@ CLEAR ALL IMAGES, CONTAINERS, CACHES
 docker system prune
 
 "docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/nulls"
+
+VM LINK: https://www.swisstransfer.com/d/f21942c3-d3b0-4506-a3b9-b1f05067ac7e
