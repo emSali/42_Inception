@@ -24,7 +24,14 @@ volumes:
 services:
   mariadb:
     container_name: mariadb
-    build: ./requirements/mariadb
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+      args:
+        SQL_DATABASE: $DATABASE_NAME
+        SQL_USER: $DB_USER
+        SQL_PWD: $DB_PASSWORD
+        SQL_ROOT_PWD: $DB_ROOT_PASSWORD
     env_file:
       - .env
     volumes:

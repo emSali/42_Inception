@@ -1,24 +1,23 @@
 FROM	debian:bullseye
 
-RUN	    apt-get update && \
-        apt-get install -y mariadb-server
+ARG SQL_DATABASE=a
+ARG SQL_USER=a
+ARG SQL_PWD=a
+ARG SQL_ROOT_PWD=a
 
-# RUN	mkdir -p /run/mysqld \
-#	&& chown -R mysql:mysql /run/mysqld \
-#	&& chmod 777 /run/mysqld
-	
+RUN apt update -y
+RUN apt-get install mariadb-server -y
 
-COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY	./tools/initial_db.sql /var/www/
+RUN service mariadb start && \
+    mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${SQL_DATABASE}; \
+    CREATE USER IF NOT EXISTS ${SQL_USER}@'localhost' IDENTIFIED BY '${SQL_PWD}'; \
+    GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO ${SQL_USER}@'%' IDENTIFIED BY '${SQL_PWD}'; \
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PWD}'; \
+    FLUSH PRIVILEGES;" && \
+    mysqladmin -u root -p$SQL_ROOT_PWD shutdown
 
-#RUN	chmod +x /script.sh
+CMD ["mysqld_safe"]
 
-#CMD	[ "/script.sh" ]
-
-RUN	    service mariadb start && mysql < /var/www/initial_db.sql && rm -f /var/www/initial_db.sql;
-
-EXPOSE  3306
-
-#Command to launch mariadb 
-CMD 	["mysqld"]
+EXPOSE 3306
