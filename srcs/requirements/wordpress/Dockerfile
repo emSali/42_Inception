@@ -7,6 +7,7 @@ RUN			apt-get update && apt-get install -y \
 			php-mysqli \
 			mariadb-client
 
+#remove  the package list downloaded by apt-get update
 RUN			rm -rf /var/lib/apt/lists/*
 
 
